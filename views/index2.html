@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,user-scalable=0">
+    <title>Development</title>
+    <link rel="manifest" href="/assets/manifest/manifest.json">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/materialize.min.css">
+
+    <style>
+    
+    #img_container,.center-aligned{
+        text-align: center;
+        margin:auto;
+    }
+
+    .logo-text {
+        text-align: center;
+        margin: auto;
+        font-size: 20px;
+        padding-left:20px;
+    }
+
+
+    #main_door_status {
+        font-weight: bolder;
+    }
+    
+    .bolder_text{
+        font-weight: bolder;
+    }
+
+    .sidenav .user-view .circle {
+    height: 175px;
+    width: 140px;
+    margin: auto;
+    
+}
+
+    .background{
+        
+        background-size: contain;
+    }
+
+    .name-typo {
+        font-size: 22px;
+        font-weight: bold;
+    }
+    
+    .collapsible-body > p{
+        line-height: normal;
+        margin-left: 10px;
+    }
+
+    .footer-copyright {
+        margin-left:27px;
+    }
+
+   
+    </style>
+</head>
+<body>
+
+
+    <!-- NavBar -->
+    <div class="navbar-fixed">
+    <nav class="#212121 grey darken-4">
+            <div class="nav-wrapper">
+                    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <a href="#" class="logo-text">Virtual Home Assistant</a>
+                    <a href="#" class="right"><i class="material-icons">mic</i></a>
+            </div>
+    </nav>
+    </div>
+    <!-- Mobile SideBar-->
+    <ul id="slide-out" class="sidenav">
+      <li>
+        <div class="user-view center">
+        <div class="background #212121 grey darken-4">
+          
+        </div>
+        <a href="#user"></a><img class="circle" src="../assets/images/face.png"></a>
+        <a href="#name"><span class="white-text name-typo">Mufti Hyder Ali</span></a>
+        <a href="#email"><span class="white-text">hyderdevelops@yahoo.com</span></a>
+      </div>
+
+      <ul class="collapsible">
+            <li>
+              <div class="collapsible-header"><i class="material-icons">
+                    new_releases
+                    </i>What is Smart Home?</div>
+              <div class="collapsible-body"><p>This application features Client Side of Smart Home Automation, build at Islamic University of Science and Technology. Using this voice driven application a user is able to control entire home , all by issuing voice commands to a virtual assistant named Alexa. Most basic commands have been hard coded to her, but Alexa has the potential to engage user in conversations too. </p></div>
+            </li>
+            <li>
+              <div class="collapsible-header"><i class="material-icons">place</i>Commands Format</div>
+              <div class="collapsible-body"><p>Commands are divided into 2 categories :
+                  <br>=> General Commands: are commands in which user wants to interact with virtual agent without invoking any automation. These commands can be examplified as asking Alexa : Who is your Boss?
+                  <br>
+                  => General Commands Format ,  Alexa : your command. eg Alexa : How are you ?
+                
+                
+                  => Specific Commands : are commands intended to perform some home automation action.
+                  <br>
+                  Format , Place : Object : Action. examples are 
+                  Kitchen Lights On. 
+                  Living Space Door Open. 
+                  Master Bedroom Television On.                  
+
+              </p></div>
+            </li>
+            <li>
+              <div class="collapsible-header"><i class="material-icons">whatshot</i>Technology Stack</div>
+              <div class="collapsible-body"><p>At the core of our home automation lies Intel Edison Single Board Computer connected to an array of circuit board relays. To unleash the true potential of Edison board , there was a need to exploit the Linux OS it was running to our advantage. Rather than signing up for a 3rd party cloud service, this project uses its own dedicated server running on Node.JS platform making use of RestFul API as well as Web Sockets to ensure real time communication. The Client Side App uses Web Integerated Speech API to capture user commands, once these are successfully captured are then send to Edison running server for processing using Socket. The edison on receiving commands uses GPIO pins to invoke the desired result. </p></div>
+            </li>
+          </ul>
+      
+      <li><div class="divider"></div></li>
+      <li><a class="subheader">Configuration</a></li>
+      
+      
+    </ul>
+    <!-- Side Bar  ends -->
+
+
+        <!-- Main Status -->
+
+        <div class="row">
+                <div class="col s12 m6">
+                  <div class="card ">
+                    <div class="card-content center">
+                      <div><span class="card-title">Current Main Door Status</span>
+                        <p class="card-title red-text" id="main_door_status" >Locked</p>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+        </div>
+
+            <!-- Main Status Ends   -->
+
+
+            
+
+            <!-- Collection Status Starts -->
+        <div>
+            
+            <ul class="collection">
+
+                    <!-- Living Space -->
+                    <li class="collection-item avatar ">
+                            <i class="material-icons circle black">free_breakfast</i>
+                      <span class="title bolder_text">Living Space : Ground Floor</span>
+
+                      <div class="card  #212121 grey darken-4">
+                            
+                            <div class="card-tabs">
+                              <ul class="tabs tabs-fixed-width tabs-transparent">
+                                <li class="tab"><a href="#ls_lights"> <i class="material-icons">
+                                        highlight
+                                        </i> Lights</a></li>
+                                <li class="tab"><a  href="#ls_door"><i class="material-icons">
+                                        directions_walk
+                                        </i> Door</a></li>
+                                
+                              </ul>
+                            </div>
+                            <div class="card-content center white">
+                              <div id="ls_lights" class="active" style="display:block">
+                                  <span><i class="material-icons">
+                                        highlight
+                                        </i>  Lights :</span> <span id='ls_lights_status' class="green-text">ON</span>
+                              </div>
+                              <div id="ls_door" style="display:none"><span> <i class="material-icons">
+                                    directions_walk
+                                    </i> Door :</span> <span id='ls_door_status' class="green-text">OPEN</span></div>
+                              
+                            </div>
+                          </div>
+                      
+                    </li>
+                    
+
+                    <!-- Kitchen -->
+
+                    <li class="collection-item avatar">
+                    <i class="material-icons circle black">kitchen</i>
+                      <span class="title bolder_text">Kitchen : Ground Floor</span>
+                      <div class="card #212121 grey darken-4">
+                            
+                            <div class="card-tabs">
+                              <ul class="tabs tabs-fixed-width tabs-transparent">
+                                <li class="tab"><a href="#kitchen_lights"><i class="material-icons">
+                                        highlight
+                                        </i> Lights</a></li>
+                                <li class="tab"><a  href="#kitchen_burner"> <i class="material-icons">
+                                        flash_on
+                                        </i> Burner</a></li>
+                                
+                                
+                              </ul> 
+                            </div>
+                            <div class="card-content center white ">
+                              <div id="kitchen_lights" class="active" style="display:block">
+                                  <span> <i class="material-icons">
+                                        highlight
+                                        </i> Lights :</span> <span id='kitchen_lights_status' class="green-text">ON</span>
+                              </div>
+                              <div id="kitchen_burner" style="display:none"><span> <i class="material-icons">
+                                    flash_on
+                                    </i> Burner :</span> <span id='kitchen_burner_status' class="green-text">ON</span></div>
+                              
+                            </div>
+                          </div>
+                    </li>
+
+                    <!-- Master Bedroom -->
+
+                    <li class="collection-item avatar">
+                            <i class="material-icons circle black">hotel</i>
+                              <span class="title bolder_text">Master Bedroom : First Floor</span>
+                              <div class="card #212121 grey darken-4">
+                            
+                                    <div class="card-tabs ">
+                                    <ul class="tabs tabs-fixed-width tabs-transparent">
+                                        <li class="tab"><a href="#mb_lights">Lights</a></li>
+                                        <li class="tab"><a  href="#mb_tv">Television</a></li>
+                                        <li class="tab"><a  href="#mb_pc">Computer</a></li>
+
+                                        
+                                        
+                                      </ul>
+                                    </div>
+                                    <div class="card-content white center">
+                                      <div id="mb_lights" class="active" style="display:block">
+                                          <span> <i class="material-icons">
+                                                highlight
+                                                </i> Lights :</span> <span id='mb_lights_status' class="green-text">ON</span>
+                                      </div>
+                                      <div id="mb_tv" style="display:none"><span> <i class="material-icons">
+                                            tv
+                                            </i> TV :</span> <span id='mb_tv_status' class="green-text">ON</span></div>
+
+                                      <div id="mb_pc" style="display:none"><span> <i class="material-icons">
+                                            desktop_windows
+                                            </i> PC :</span> <span id='mb_pc_status' class="green-text">ON</span></div>
+                                      
+                                    </div>
+                                  </div>
+                    </li>
+                    
+                  </ul>
+        </div>
+         <!-- Collection Status Ends -->
+
+
+    
+         <footer class="page-footer #212121 grey darken-4">
+                <div class="footer-copyright">
+                        <p class="white-text">Department of Computer Sc. and Eng. IUST (2019)</p>
+                </div>
+         </footer>
+    
+
+   
+
+    <script src="../assets/js/materialize.min.js"></script>
+    <script src="/assets/js/socket.io.js"></script>
+    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+    <script>
+
+        
+        /* side bar*/
+
+        document.addEventListener('DOMContentLoaded', function() {
+        var instances = M.AutoInit();
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+
+       
+        
+        });
+
+
+            /* Initialize Socket */
+
+            var socket = io(window.location.href);
+            
+
+      
+
+        
+        
+
+
+
+
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(function(stream) {
+        console.log('You let me use your mic!')
+      })
+      .catch(function(err) {
+        console.log('No mic for you!')
+      });
+
+
+    if (annyang) {
+        
+    // Let's define our first command. First the text we expect, and then the function it should call
+    
+    var sendTalkToServer = function (tag) {
+    console.log('Sending to Server : ' + tag);
+    socket.emit('aiTalk',tag);
+    }
+    
+    var commands = {
+
+    'Alexa *tag': sendTalkToServer,
+
+    'kitchen lights on': function() {
+        
+      responsiveVoice.speak("I am switching on Kitchen Lights","Hindi Female");
+      ChangeUIonCommand('kitchen_lights_status',"ON");
+      socket.emit('kitchen_lights',1);
+      M.toast({html: 'Kitchen Lights Switched On!'});
+    },
+
+    'kitchen lights off':function() {
+        responsiveVoice.speak("I am switching off Kitchen Lights","Hindi Female");
+      ChangeUIonCommand('kitchen_lights_status',"OFF");
+      socket.emit('kitchen_lights',0);
+      M.toast({html: 'Kitchen Lights Switched Off!'});
+    },
+
+    'kitchen burner on':function() {
+        responsiveVoice.speak("I am switching on Kitchen Burner","Hindi Female");
+      ChangeUIonCommand('kitchen_burner_status',"ON");
+      socket.emit('kitchen_burner',1);
+      M.toast({html: 'Kitchen Burner Switched ON!'});
+    },
+
+    'kitchen burner off':function() {
+        responsiveVoice.speak("I am switching off Kitchen Burner","Hindi Female");
+      ChangeUIonCommand('kitchen_burner_status',"OFF");
+      socket.emit('kitchen_burner',0);
+      M.toast({html: 'Kitchen Burner Switched Off!'});
+    },
+
+    'living space lights on':function() {
+        responsiveVoice.speak("I am switching on Living Space Lights","Hindi Female");
+      ChangeUIonCommand('ls_lights_status',"ON");
+      socket.emit('ls_lights',1);
+      M.toast({html: 'Living Space Lights Switched On!'});
+    },
+
+
+    'living space lights off':function() {
+        responsiveVoice.speak("I am switching off Living Space Lights","Hindi Female");
+      ChangeUIonCommand('ls_lights_status',"OFF");
+      socket.emit('kitchen_lights',0);
+      M.toast({html: 'Living Space Lights Switched Off!'});
+    },
+
+    'living space door open':function() {
+        responsiveVoice.speak("I am opening Living Space Door","Hindi Female");
+      ChangeUIonCommand('ls_door_status',"OPEN");
+      socket.emit('ls_door',1);
+      M.toast({html: 'Door Opened!'});
+    },
+
+    'living space door close':function() {
+        responsiveVoice.speak("I am closing Living Space Door","Hindi Female");
+      ChangeUIonCommand('ls_door_status',"LOCKED");
+      socket.emit('ls_door',0);
+      M.toast({html: 'Door Closed!'});
+    },
+    
+    'main door open':function() {
+        responsiveVoice.speak("I am opening the main door","Hindi Female");
+      ChangeUIonCommand('main_door_status',"OPEN");
+      socket.emit('main_door',1);
+      M.toast({html: 'Main Door OPEN !'});
+    },
+    
+    'main door close':function() {
+        responsiveVoice.speak("I am closing the main door","Hindi Female");
+      ChangeUIonCommand('main_door_status',"LOCKED");
+      socket.emit('main_door',0);
+      M.toast({html: 'Main Door LOCKED !'});
+    },
+
+    'master bedroom lights on':function() {
+        responsiveVoice.speak("I am switching on lights","Hindi Female");
+      ChangeUIonCommand('mb_lights_status',"ON");
+      socket.emit('mb_lights',1);
+      M.toast({html: 'Bedroom Lights ON !'});
+    },
+
+
+    'master bedroom lights off':function() {
+        responsiveVoice.speak("I am switching off bedroom lights","Hindi Female");
+      ChangeUIonCommand('mb_lights_status',"OFF");
+      socket.emit('mb_lights',0);
+      M.toast({html: 'Bedroom Lights OFF !'});
+    },
+
+    'master bedroom television on':function() {
+        responsiveVoice.speak("I am turning on Television","Hindi Female");
+      ChangeUIonCommand('mb_tv_status',"ON");
+      socket.emit('mb_tv',1);
+      M.toast({html: 'Television ON !'});
+    },
+
+    'master bedroom television off':function() {
+        responsiveVoice.speak("I am turning off Television","Hindi Female");
+      ChangeUIonCommand('mb_tv_status',"OFF");
+      socket.emit('mb_tv',0);
+      M.toast({html: 'Television OFF !'});
+    },
+
+
+    'master bedroom computer on':function() {
+        responsiveVoice.speak("I am turning on your computer","Hindi Female");
+      ChangeUIonCommand('mb_pc_status',"ON");
+      socket.emit('mb_pc',1);
+      M.toast({html: 'Computer turned ON !'});
+    },
+
+    'master bedroom computer off':function() {
+        responsiveVoice.speak("I am turning off your computer","Hindi Female");
+      ChangeUIonCommand('mb_pc_status',"OFF");
+      socket.emit('mb_pc',0);
+      M.toast({html: 'Computer turned OFF !'});
+    },
+  };
+
+
+
+
+
+  
+  annyang.addCommands(commands);
+
+  annyang.start();
+}
+
+socket.on('aiTalkResponse',function(response) {
+      console.log("Response : " +response);
+    responsiveVoice.speak(response,"Hindi Female");
+  })
+
+
+function ChangeUIonCommand(element_id,text){
+    document.querySelector(`#${element_id}`).textContent = text;
+    let classname;
+    if(text == "OPEN" || text == "ON"){
+        classname ="green-text"
+    }
+    else {
+        classname = "red-text"
+    }
+    document.querySelector(`#${element_id}`).className = classname;
+}
+
+    
+    
+
+    </script>
+</body>
+</html>
